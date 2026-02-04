@@ -1,0 +1,168 @@
+{
+  "openai": {
+    "default": {
+      "api_key": "",
+      "base_url": ""
+    },
+    "optimize": {
+      "api_key": "sk-y0R2gG3ENvwtqQz13w3ISFYtMDfP5EYPinONt9oyBDDqBzrw",
+      "base_url": "https://fastapi.aabao.top/v1",
+      "model": "gpt-4o"
+    },
+    "summarize": {
+      "api_key": "sk-hXAiyPD8x5DN2aBLbC1XJPK5uKGscZBEHAgleG7YBJsocd0N",
+      "base_url": "https://fastapi.aabao.top/v1",
+      "model": "gemini-3-pro-preview-thinking"
+    }
+  },
+  "prompts": {
+    "summarizer": {
+      // 需要的截图数量
+      "screenshot_count": 6,
+      // 单次优化格式化（中文/英文）- system/user
+      "optimize_format": {
+        "zh": {
+                  // 单块优化格式化（中文）- system
+          "system": [
+            "你是专业的金融与加密货币领域音频转录文本优化专家。你的任务是修正ASR（语音识别）错误、提升文本可读性。重点在于：确保交易术语、货币代码、价格数字的绝对准确。必须保持原意，保留关键的时间线信息。根据原始时间范围，为每句话生成标准时间戳并置于句首，格式为[HH:MM:SS]。不要合并段落，严格保持原句顺序。绝对不要改变人称代词或说话者视角。"
+          ],
+          // 单块优化格式化（中文）- user
+          "user": [
+            "请对以下音频转录文本进行针对性优化，以辅助后续的行情分析。要求：",
+            "",
+            "**内容优化（术语与数据优先）：**",
+            "1. **术语修正（最高优先级）**：识别并修正加密货币专业术语、指标和俚语（例如：Fibonacci/斐波那契, RSI, MACD, Long/Short, Liquidation/爆仓/清算, FOMO, ATH等）。",
+            "2. **数字精准化**：将口语中的价格数字转换为阿拉伯数字（例如：'六万九' -> '69,000'；'五百点' -> '500点'），务必区分'K'（千）和'M'（百万），这对价格位分析至关重要。",
+            "3. **一般修正**：修正错别字、同音字，适度改善语法，补全不完整句子。",
+            "4. **口语处理**：保留必要的语气和强调，但可以去除纯粹的无意义口吃，保持语言流畅。",
+            "5. **绝对不要改变人称代词（I/我、you/你等）和说话者视角**。",
+            "",
+            "**时间戳规则：**",
+            "- 依据原始时间范围，为每一句生成一个标准时间戳",
+            "- 时间戳格式统一为 [HH:MM:SS]，使用该句对应片段的起始时间",
+            "- 移除原始的 **[start - end]** 格式",
+            "",
+            "**输出格式：**",
+            "- 每句话单独一行，以 [HH:MM:SS] 开头，后跟空格和优化后的句子",
+            "- 纯文本输出，不包含Markdown标题或额外解释",
+            "",
+            "原始转录文本：",
+            "{chunk_text}"
+          ]
+        },
+        "en": {
+          // 单块优化格式化（英文）- system
+          "system": [
+            "You are an expert financial and cryptocurrency transcript optimization specialist. Your goal is to fix ASR errors and improve readability for market analysis. Priority: Ensure absolute accuracy of trading terminology, coin symbols (e.g., BTC, ETH), and price figures. Maintain original meaning and timeline. Add a standard timestamp [HH:MM:SS] to every sentence. Do not merge paragraphs. NEVER change pronouns or speaker perspective."
+          ],
+          // 单块优化格式化（英文）- user
+          "user": [
+             "Please intelligently optimize the following audio transcript text to facilitate market analysis, Requirements:",
+            "",
+            "**Content Optimization (Terminology & Data First):**",
+            "1. **Terminology Correction:** Fix crypto/finance jargon and indicators (e.g., Fibonacci, RSI, MACD, Liquidation, Short Squeeze, ATH, Bullish/Bearish).",
+            "2. **Number Standardization:** Convert spoken numbers into digits for clarity (e.g., convert 'twenty-five k' to '25,000'; 'two point five million' to '2.5M'). Distinguish between price levels and quantities.",
+            "3. **Error Correction:** Fix typos and homophones (e.g., ensure 'buy' vs 'by', 'sell' vs 'cell' are correct in trading context).",
+            "4. **Speech processing:** Remove non-semantic stutters (uh, um) to make the technical analysis clearer, but keep the natural flow and emphasis.",
+            "5. **NEVER change pronouns (I, you, he, she, etc.) or speaker perspective**.",
+            "",
+            "**Timestamp Rules:**",
+            "- For every sentence, add a standard timestamp derived from the original time range",
+            "- Use the format [HH:MM:SS] and pick the start time of the sentence's source segment",
+            "- Remove original **[start - end]** range lines",
+            "",
+            "**Output Format:**",
+            "- One sentence per line, prefixed by [HH:MM:SS] and a space",
+            "- Do not add headings or new paragraphs; output plain text only",
+            "",
+            "Original transcript text:",
+            "{chunk_text}"
+          ]
+        }
+      },
+      // 截图请求（根据全文时间戳挑选截图）- system/user
+      "screenshot_request": {
+        // 截图请求（system）
+        "system": [
+          "你是专业的加密货币交易视频截图规划专家。你的任务是从文稿中识别出**展示关键图表或数据**的时间点。",
+          "",
+          "筛选原则：",
+          "1. **图表优先**：优先选择包含具体技术分析描述的时刻（如提到“看这张图”、“这里的均线”、“斐波那契回调”等）。",
+          "2. **价格关键点**：当讲者明确指出某个具体价格（支撑/阻力/止损）并暗示屏幕上有显示时。",
+          "3. **数据展示**：当讲者分析链上数据、新闻网页或持仓图表时。",
+          "4. **分散原则**：尽量覆盖视频的不同分析阶段（长线/短线/总结），避免截图过于集中。",
+          "",
+          "输出要求：",
+          "输出必须是严格的 JSON 数组，不要包含任何 Markdown 标记或额外文字。",
+          "每个元素格式为：{\"timestamp\": \"HH:MM:SS\", \"reason\": \"简短说明（如：日线图头肩顶结构 / 65k压力位分析）\"}。",
+          "timestamp 必须严格匹配原文中已有的时间戳。"
+        ],
+        // 截图请求（user）
+        "user": [
+          "以下是包含时间戳的比特币行情分析文稿：",
+          "",
+          "{transcript}",
+          "",
+          "请基于从文稿中推断的视觉信息，返回最具分析价值的 {screenshot_count} 个截图时间点（JSON数组）。"
+        ]
+
+      },
+    // 单次摘要（不分段）- system/user
+      "summarize_single": {
+        // 单段摘要（整段摘要）- system
+        "system": [
+          "你是一位专业的加密货币市场分析师及交易员。请为以下比特币（Bitcoin）行情分析视频的文稿生成一份深度总结。",
+          "",
+          "总结要求：",
+          "1. **核心观点提炼**：明确指出讲者是看涨（Bullish）、看跌（Bearish）还是看震荡，并说明理由。",
+          "2. **关键价格点提取（至关重要）**：必须详细列出文中提到的所有关键价位，包括但不限于：",
+          "   - 压力位/阻力区 (Resistance/Supply Zones)",
+          "   - 支撑位/需求区 (Support/Demand Zones)",
+          "   - 清算点/爆仓点 (Liquidation Levels)",
+          "   - 下跌/上涨目标价 (Price Targets)",
+          "3. **逻辑与依据**：简述得出上述价格点的技术分析依据（如斐波那契、K线形态、成交量、链上数据等）。",
+          "4. **语言风格**：使用专业、简练的中文金融交易术语。",
+          "5. **数据准确性**：确保提取的价格数字与文稿完全一致。",
+          "6. **输出格式**：输出为逻辑连贯的分析报告，重点数据可加粗显示，便于快速阅读。"
+        ],
+        // 单段摘要（整段摘要）- user
+        "user": [
+          "基于以下视频文稿，撰写一份包含关键交易数据的行情总结：",
+          "",
+          "{transcript}",
+          "",
+          "特别指令：",
+          "- 忽略无意义的寒暄，直接进入行情分析。",
+          "- **特别强调**：作者认为的入场点、止损点和止盈点（如果提及）。",
+          "- 清楚地说明当前的宏观市场背景或短期技术形态。",
+          "- 确保不仅总结过去发生了什么，更要总结作者对**未来走势**的具体预测。",
+          "- 如果文中有提到图表或截图的特定形态（如头肩顶、楔形等），请务必包含在内。"
+        ]
+      }
+    },
+    "translator": {
+      // 翻译（单段翻译）- system/user
+      "translate": {
+        // 翻译（单段翻译）- system
+        "system": [
+          "你是资深的金融与加密货币市场翻译专家。请将{source_lang_name}文本翻译为规范的{target_lang_name}。",
+          "",
+          "翻译原则：",
+          "1. **术语精准**：确保交易术语的翻译符合金融语境。",
+          "   - Examples: 'Short' -> '做空', 'Long' -> '做多', 'Resistance' -> '阻力位', 'Support' -> '支撑位', 'Bullish' -> '看涨', 'Bearish' -> '看跌'。",
+          "2. **格式保留**：严格保留原文的 Markdown 格式（如加粗 **Bold** 的价格数据、列表符号等），这对可读性至关重要。",
+          "3. **信达雅**：译文应具有专业研报的语感，流畅且逻辑严密，避免机器翻译的生硬感。",
+          "4. **数据一致**：绝对不要修改原文中的数字或货币符号。"
+        ],
+        // 翻译（单段翻译）- user
+        "user": [
+          "请将以下行情分析内容的{source_lang_name}文本翻译为{target_lang_name}：",
+          "",
+          "{text}",
+          "",
+          "仅返回翻译结果，保持原文的排版结构，无需额外解释。"
+        ]
+      }
+    }
+  }
+}
