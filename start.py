@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AI视频转录器启动脚本
+BitVideo Insight 启动脚本
 """
 
 import os
@@ -91,7 +91,7 @@ def main():
     # 检查是否使用生产模式（禁用热重载）
     production_mode = "--prod" in sys.argv or os.getenv("PRODUCTION_MODE") == "true"
     
-    print("🚀 AI视频转录器启动检查")
+    print("🚀 BitVideo Insight (比特币视频分析助手) 启动检查")
     if production_mode:
         print("🔒 生产模式 - 热重载已禁用")
     else:

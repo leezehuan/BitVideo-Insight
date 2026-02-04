@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# AI视频转录器安装脚本
+# BitVideo Insight 安装脚本
 
-echo "🚀 AI视频转录器安装脚本"
+echo "🚀 BitVideo Insight (比特币视频分析助手) 安装脚本"
 echo "=========================="
 
 # 检查Python版本

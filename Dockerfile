@@ -1,4 +1,4 @@
-# AI视频转录器 Docker镜像 - 使用标准镜像确保兼容性
+# BitVideo Insight Docker镜像 - 使用标准镜像确保兼容性
 FROM python:3.9-slim
 
 # 设置工作目录

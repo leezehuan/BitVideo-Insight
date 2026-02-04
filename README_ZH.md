@@ -1,10 +1,10 @@
 <div align="center">
 
-# AI视频转录器
+# 比特币视频分析助手 (BitVideo Insight)
 
 中文 | [English](README.md)
 
-一款开源的AI视频转录和摘要工具，支持YouTube、Bilibili、抖音等30+平台。
+一款专为比特币及加密货币市场分析设计的 AI 视频转录与信息提取工具。支持 YouTube、Bilibili、抖音等 30+ 平台，通过视觉增强摘要与精准时间戳，助您快速掌握行情动向。
 
 ![Interface](cn-video.png)
 
@@ -12,13 +12,13 @@
 
 ## ✨ 功能特性
 
-- 🎥 **多平台支持**: 支持YouTube、Bilibili、抖音等30+平台
-- 🗣️ **智能转录**: 使用Faster-Whisper模型进行高精度语音转文字
-- 🤖 **AI文本优化**: 自动错别字修正、句子完整化，并为每句话添加标准时间戳前缀 `[HH:MM:SS]`
-- 🌍 **多语言摘要**: 支持多种语言的智能摘要生成
-- 🖼️ **截图增强摘要**: 大模型基于全文时间戳规划关键截图，FFmpeg自动截帧，在转录中插入图片标注，并使用图文多模态生成摘要
-- ⚡ **实时进度**: 实时进度跟踪和状态更新
-- ⚙️ **条件式翻译**: 当所选摘要语言与检测到的转录语言不一致时，自动调用GPT‑4o生成翻译
+- 🎥 **多平台支持**: 深度适配 YouTube、Bilibili、抖音等加密货币博主常用平台
+- 🗣️ **智能转录**: 使用 Faster-Whisper 模型进行高精度语音转文字，适配金融/交易术语
+- 📸 **图文增强摘要**: 自动捕获视频关键画面（如 K 线图、分析图表），结合多模态 AI 生成图文并茂的深度摘要
+- ⏱️ **精准时间戳**: 为优化后的每一句文案保留 `[HH:MM:SS]` 格式时间标签，方便回溯原始视频画面
+- 🤖 **AI 文本优化**: 自动错别字修正、句子完整化，特别针对比特币等行业词汇进行优化
+- 🌍 **多语言摘要**: 支持多种语言的智能摘要生成，全球资讯一网打尽
+- ⚙️ **条件式翻译**: 当摘要语言与视频语言不同时，自动调用 GPT-4o 生成高保真翻译
 - 📱 **移动适配**: 完美支持移动设备
 
 ## 🚀 快速开始
@@ -36,8 +36,8 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/wendy7756/AI-Video-Transcriber.git
-cd AI-Video-Transcriber
+git clone https://github.com/leezehuan/BitVideo-Insight.git
+cd BitVideo-Insight
 
 # 运行安装脚本
 chmod +x install.sh
@@ -48,8 +48,8 @@ chmod +x install.sh
 
 ```bash
 # 克隆项目
-git clone https://github.com/wendy7756/AI-Video-Transcriber.git
-cd AI-Video-Transcriber
+git clone https://github.com/leezehuan/BitVideo-Insight.git
+cd BitVideo-Insight
 
 # 使用Docker Compose（最简单）
 cp .env.example .env
@@ -122,63 +122,21 @@ python3 start.py --prod
 
 ## 📖 使用指南
 
-1. **输入视频链接**: 在输入框中粘贴YouTube、Bilibili等平台的视频链接
-2. **选择摘要语言**: 选择希望生成摘要的语言
-3. **开始处理**: 点击"开始"按钮
-4. **监控进度**: 观察实时处理进度，包含多个阶段：
-   - 视频下载和解析
-   - 使用Faster-Whisper进行音频转录
-   - AI智能转录优化（错别字修正、句子完整化、句级 `[HH:MM:SS]` 时间戳）
-   - 截图规划与关键帧截取（可选，由大模型驱动）
-   - 转录文本插入图片标注（可选）
-   - 生成选定语言的AI摘要
-5. **查看结果**: 查看优化后的转录文本和智能摘要
-   - 如果转录语言 ≠ 所选摘要语言，会显示第三个标签页"翻译"，包含翻译后的转录文本
-6. **下载文件**: 点击下载按钮保存Markdown格式的文件（转录/翻译/摘要）
+1. **输入视频链接**: 粘贴加密货币分析视频链接（如 YouTube 的某场直播或 B 站技术分析）
+2. **选择摘要语言**: 默认中文，亦可选择其他语言以参考全球分析
+3. **开始处理**: 点击"开始"按钮，系统将自动进行：
+   - 视频下载与元数据解析
+   - 语音转录与行业词汇优化
+   - **AI 视觉规划**: 根据内容自动锁定行情关键帧（如价格波动、技术指标点）
+   - **自动截帧**: 提取高清晰度视频截图
+   - **多模态总结**: 将“转录文本 + 截图”共同输入 AI，生成带图的行情复盘
+4. **查看结果**:
+   - **转录文本**: 带精准时间戳的逐句对话
+   - **智能摘要**: 嵌入关键 K 线截图的结构化总结
+   - **翻译**: 跨语言信息的快速对齐
+5. **下载成果**: 保存 Markdown 格式，完美兼容 Obsidian, Notion 等笔记软件
 
-## �️ 截图增强摘要输出示例
-
-以下为简化示例，用于展示“截图增强摘要”在转录与摘要中的典型输出形态。
-
-### 1）优化转录（每句带时间戳）
-
-```text
-[00:02:15] 这里我们可以看到日线图价格突破均线。
-[00:02:22] 65,000 一带正在形成明显的压力位。
-[00:03:40] 如果这里被拒绝，下一个关键支撑大约在 61,500。
-```
-
-### 2）截图计划（大模型输出 JSON）
-
-```json
-[
-  {"timestamp": "00:02:15", "reason": "日线图突破均线"},
-  {"timestamp": "00:02:22", "reason": "65,000 压力位分析"}
-]
-```
-
-### 3）插图后的转录（移除时间戳、插入图片）
-
-```markdown
-这里我们可以看到日线图价格突破均线。 (图1)
-![图1](/api/screenshot/btc_analysis_ab12cd/shot_01_00-02-15.jpg)
-
-65,000 一带正在形成明显的压力位。 (图2)
-![图2](/api/screenshot/btc_analysis_ab12cd/shot_02_00-02-22.jpg)
-```
-
-说明：`{folder}`（示例中的 `btc_analysis_ab12cd`）等于 `{safe_title}_{short_id}`。
-
-### 4）摘要片段（图文多模态）
-
-```markdown
-## 核心结论
-
-- 作者偏 **看涨**：从图1可见日线结构突破均线，趋势转强。
-- **65,000** 是关键压力（图2）。若遇阻回落，可能回撤至 **61,500** 附近寻找支撑。
-```
-
-## �🛠️ 技术架构
+## 🛠️ 技术架构
 
 ### 后端技术栈
 - **FastAPI**: 现代化的Python Web框架
@@ -204,9 +162,7 @@ AI-Video-Transcriber/
 ├── static/                 # 前端文件
 │   ├── index.html          # 主页面
 │   └── app.js              # 前端逻辑
-├── config.jsonc             # 配置入口（提示词与OpenAI设置）
 ├── temp/                   # 临时文件目录
-│   └── screenshots/         # 截图增强摘要生成的关键帧
 ├── Docker相关文件           # Docker部署
 │   ├── Dockerfile          # Docker镜像配置
 │   ├── docker-compose.yml  # Docker Compose配置
@@ -219,31 +175,14 @@ AI-Video-Transcriber/
 
 ## ⚙️ 配置选项
 
-本项目以 `config.jsonc` 为主要配置来源。后端启动时会读取 `config.jsonc` 并应用到环境变量（因此你可以选择用 `config.jsonc` 配置、环境变量配置，或两者结合）。
-
-截图增强摘要的截图数量可通过 `config.jsonc` 中的 `prompts.summarizer.screenshot_count` 调整。
-
 ### 环境变量
 
 | 变量名 | 描述 | 默认值 | 必需 |
 |--------|------|--------|------|
 | `OPENAI_API_KEY` | OpenAI API密钥 | - | 否 |
-| `OPENAI_BASE_URL` | OpenAI兼容端点Base URL | - | 否 |
-| `OPENAI_OPTIMIZE_API_KEY` | 转录优化所用API Key | `OPENAI_API_KEY` | 否 |
-| `OPENAI_OPTIMIZE_BASE_URL` | 转录优化所用Base URL | `OPENAI_BASE_URL` | 否 |
-| `OPENAI_OPTIMIZE_MODEL` | 转录优化所用模型 | `gpt-3.5-turbo` | 否 |
-| `OPENAI_SUMMARIZE_API_KEY` | 摘要所用API Key | `OPENAI_API_KEY` | 否 |
-| `OPENAI_SUMMARIZE_BASE_URL` | 摘要所用Base URL | `OPENAI_BASE_URL` | 否 |
-| `OPENAI_SUMMARIZE_MODEL` | 摘要所用模型（需支持多模态） | `gpt-4o` | 否 |
 | `HOST` | 服务器地址 | `0.0.0.0` | 否 |
 | `PORT` | 服务器端口 | `8000` | 否 |
 | `WHISPER_MODEL_SIZE` | Whisper模型大小 | `base` | 否 |
-
-### 截图资源
-
-- 转录文本中会插入 Markdown 图片链接，指向后端接口：
-  - `GET /api/screenshot/{folder}/{filename}`
-- 截图文件保存在：`temp/screenshots/{safe_title}_{short_id}/`。
 
 ### Whisper模型大小选项
 
@@ -288,8 +227,8 @@ A: Docker提供了最简单的部署方式：
 **快速开始：**
 ```bash
 # 克隆和配置
-git clone https://github.com/wendy7756/AI-Video-Transcriber.git
-cd AI-Video-Transcriber
+git clone https://github.com/leezehuan/BitVideo-Insight.git
+cd BitVideo-Insight
 cp .env.example .env
 # 编辑.env文件设置你的OPENAI_API_KEY
 

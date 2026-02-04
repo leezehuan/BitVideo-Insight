@@ -23,7 +23,7 @@ from config_loader import load_config, apply_config_to_env
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="AI视频转录器", version="1.0.0")
+app = FastAPI(title="BitVideo Insight", version="1.0.0")
 
 # CORS中间件配置
 app.add_middleware(

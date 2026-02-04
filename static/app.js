@@ -19,7 +19,7 @@ class VideoTranscriber {
         
         this.translations = {
             en: {
-                title: "AI Video Transcriber",
+                title: "BitVideo Insight",
                 subtitle: "Supports automatic transcription and AI summary for YouTube, Tiktok, Bilibili and other platforms",
                 video_url: "Video URL",
                 video_url_placeholder: "Enter YouTube, Tiktok, Bilibili or other platform video URLs...",
@@ -56,7 +56,7 @@ class VideoTranscriber {
                 error_no_file_to_download: "No file available for download"
             },
             zh: {
-                title: "AI视频转录器",
+                title: "比特币视频分析助手",
                 subtitle: "支持YouTube、Tiktok、Bilibili等平台的视频自动转录和智能摘要",
                 video_url: "视频链接",
                 video_url_placeholder: "请输入YouTube、Tiktok、Bilibili等平台的视频链接...",

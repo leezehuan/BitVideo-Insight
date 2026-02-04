@@ -1,10 +1,10 @@
 <div align="center">
 
-# AI Video Transcriber
+# BitVideo Insight - Crypto Analysis Toolkit
 
 English | [中文](README_ZH.md)
 
-An AI-powered video transcription and summarization tool that supports multiple video platforms including YouTube, Tiktok, Bilibili, and 30+ platforms.
+An AI-powered video transcription and information extraction tool specifically designed for Bitcoin and cryptocurrency market analysis. Supports YouTube, Bilibili, Tiktok, and 30+ platforms, helping you quickly grasp market trends through visual-enhanced summaries and precise timestamps.
 
 ![Interface](en-video.png)
 
@@ -12,16 +12,16 @@ An AI-powered video transcription and summarization tool that supports multiple 
 
 ## ✨ Features
 
-- 🎥 **Multi-Platform Support**: Works with YouTube, Tiktok, Bilibili, and 30+ more
-- 🗣️ **Intelligent Transcription**: High-accuracy speech-to-text using Faster-Whisper
-- 🤖 **AI Text Optimization**: Automatic typo correction and sentence completion, with a standard per-sentence timestamp prefix `[HH:MM:SS]`
-- 🌍 **Multi-Language Summaries**: Generate intelligent summaries in multiple languages
-- 🖼️ **Screenshot-Enhanced Summaries**: The LLM plans key timestamps from the transcript, extracts frames via FFmpeg, annotates the transcript with images, and generates a multimodal summary
-- ⚡ **Real-Time Progress**: Live progress tracking and status updates
-- ⚙️ **Conditional Translation**: When the selected summary language differs from the detected transcript language, the system auto-translates with GPT‑4o
+- 🎥 **Multi-Platform Support**: Deeply adapted for YouTube, Bilibili, Tiktok, and other platforms popular among crypto analysts
+- 🗣️ **Intelligent Transcription**: High-accuracy speech-to-text using Faster-Whisper, optimized for financial and trading terminology
+- 📸 **Visual-Enhanced Summary**: Automatically captures key frames (e.g., K-line charts, technical indicators) and generates in-depth summaries using multimodal AI
+- ⏱️ **Precise Timestamps**: Every sentence in the optimized transcript includes a `[HH:MM:SS]` tag for easy reference to the original video
+- 🤖 **AI Text Optimization**: Automatic typo correction and sentence completion, specifically tuned for Bitcoin and industry-specific keywords
+- 🌍 **Multi-Language Summaries**: Generate intelligent summaries in multiple languages to stay updated on global news
+- ⚙️ **Conditional Translation**: Auto-translates transcripts using GPT-4o when the summary language differs from the video language
 - 📱 **Mobile-Friendly**: Perfect support for mobile devices
 
-[![Star History Chart](https://api.star-history.com/svg?repos=wendy7756/AI-Video-Transcriber&type=Date)](https://star-history.com/#wendy7756/AI-Video-Transcriber&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=leezehuan/BitVideo-Insight&type=Date)](https://star-history.com/#leezehuan/BitVideo-Insight&Date)
 
 ## 🚀 Quick Start
 
@@ -37,8 +37,8 @@ An AI-powered video transcription and summarization tool that supports multiple 
 
 ```bash
 # Clone the repository
-git clone https://github.com/wendy7756/AI-Video-Transcriber.git
-cd AI-Video-Transcriber
+git clone https://github.com/leezehuan/BitVideo-Insight.git
+cd BitVideo-Insight
 
 # Run installation script
 chmod +x install.sh
@@ -49,8 +49,8 @@ chmod +x install.sh
 
 ```bash
 # Clone the repository
-git clone https://github.com/wendy7756/AI-Video-Transcriber.git
-cd AI-Video-Transcriber
+git clone https://github.com/leezehuan/BitVideo-Insight.git
+cd BitVideo-Insight
 
 # Using Docker Compose (easiest)
 cp .env.example .env
@@ -123,63 +123,21 @@ python3 start.py --prod
 
 ## 📖 Usage Guide
 
-1. **Enter Video URL**: Paste a video link from YouTube, Bilibili, or other supported platforms
-2. **Select Summary Language**: Choose the language for the generated summary
-3. **Start Processing**: Click the "Start" button
-4. **Monitor Progress**: Watch real-time progress through multiple stages:
-   - Video download and parsing
-   - Audio transcription with Faster-Whisper
-   - AI-powered transcript optimization (typo correction, sentence completion, per-sentence `[HH:MM:SS]` timestamps)
-   - Screenshot planning and frame extraction (optional, driven by LLM)
-   - Transcript annotation with embedded images (optional)
-   - AI summary generation in selected language
-5. **View Results**: Review the optimized transcript and intelligent summary
-   - If transcript language ≠ selected summary language, a third tab “Translation” is shown containing a translated transcript
-6. **Download Files**: Click download buttons to save Markdown-formatted files (Transcript / Translation / Summary)
+1. **Enter Video URL**: Paste a link to a crypto analysis video (e.g., a YouTube livestream or a technical analysis on Bilibili)
+2. **Select Summary Language**: Choose your preferred language to digest global market insights
+3. **Start Processing**: Click the "Start" button, and the system will:
+   - Download video and parse metadata
+   - Transcribe audio and optimize with industry terminology
+   - **AI Visual Planning**: Automatically identify key market moments (e.g., price breakouts, chart patterns)
+   - **Auto-Screenshotting**: Extract high-definition frames from the video
+   - **Multimodal Summarization**: Pass both transcript and screenshots to the AI for a comprehensive market review
+4. **View Results**:
+   - **Transcript**: Sentence-by-sentence dialogue with precise timestamps
+   - **AI Summary**: Structured summary with embedded key chart screenshots
+   - **Translation**: Quick alignment of cross-lingual information
+5. **Download Files**: Save in Markdown format, perfectly compatible with Obsidian, Notion, etc.
 
-## �️ Screenshot-Enhanced Summary Output Example
-
-Below is a simplified example showing what you may see in the generated transcript and summary.
-
-### 1) Optimized transcript (with per-sentence timestamps)
-
-```text
-[00:02:15] Here we can see the daily chart breaking above the moving average.
-[00:02:22] The 65,000 area is acting as resistance.
-[00:03:40] If price rejects here, the next support is around 61,500.
-```
-
-### 2) Screenshot plan (LLM output)
-
-```json
-[
-  {"timestamp": "00:02:15", "reason": "Daily chart breakout above MA"},
-  {"timestamp": "00:02:22", "reason": "Resistance area around 65,000"}
-]
-```
-
-### 3) Annotated transcript (timestamps removed, images embedded)
-
-```markdown
-Here we can see the daily chart breaking above the moving average. (图1)
-![图1](/api/screenshot/btc_analysis_ab12cd/shot_01_00-02-15.jpg)
-
-The 65,000 area is acting as resistance. (图2)
-![图2](/api/screenshot/btc_analysis_ab12cd/shot_02_00-02-22.jpg)
-```
-
-Note: the `{folder}` part (here `btc_analysis_ab12cd`) equals `{safe_title}_{short_id}`.
-
-### 4) Summary excerpt (multimodal)
-
-```markdown
-## Key Takeaways
-
-- The speaker is **bullish** as the daily chart breaks above the moving average (see 图1).
-- **65,000** is highlighted as a key resistance (see 图2). A rejection could lead to a pullback toward **61,500**.
-```
-
-## �🛠️ Technical Architecture
+## 🛠️ Technical Architecture
 
 ### Backend Stack
 - **FastAPI**: Modern Python web framework
@@ -205,9 +163,7 @@ AI-Video-Transcriber/
 ├── static/                 # Frontend files
 │   ├── index.html          # Main page
 │   └── app.js              # Frontend logic
-├── config.jsonc             # Single source of truth for prompts and OpenAI settings
 ├── temp/                   # Temporary files directory
-│   └── screenshots/         # Extracted frames used by screenshot-enhanced summaries
 ├── Dockerfile              # Docker image configuration
 ├── docker-compose.yml      # Docker Compose configuration
 ├── .dockerignore           # Docker ignore rules
@@ -219,31 +175,14 @@ AI-Video-Transcriber/
 
 ## ⚙️ Configuration Options
 
-This project uses `config.jsonc` as the primary configuration source. On startup, the backend loads it and applies values to environment variables (so you can configure via `config.jsonc`, env vars, or both).
-
-For screenshot-enhanced summaries, you can set `prompts.summarizer.screenshot_count` in `config.jsonc`.
-
 ### Environment Variables
 
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
 | `OPENAI_API_KEY` | OpenAI API key | - | Yes (for AI features) |
-| `OPENAI_BASE_URL` | OpenAI-compatible base URL | - | No |
-| `OPENAI_OPTIMIZE_API_KEY` | API key for transcript optimization | `OPENAI_API_KEY` | No |
-| `OPENAI_OPTIMIZE_BASE_URL` | Base URL for transcript optimization | `OPENAI_BASE_URL` | No |
-| `OPENAI_OPTIMIZE_MODEL` | Model for transcript optimization | `gpt-3.5-turbo` | No |
-| `OPENAI_SUMMARIZE_API_KEY` | API key for summarization | `OPENAI_API_KEY` | No |
-| `OPENAI_SUMMARIZE_BASE_URL` | Base URL for summarization | `OPENAI_BASE_URL` | No |
-| `OPENAI_SUMMARIZE_MODEL` | Model for summarization (multimodal supported) | `gpt-4o` | No |
 | `HOST` | Server address | `0.0.0.0` | No |
 | `PORT` | Server port | `8000` | No |
 | `WHISPER_MODEL_SIZE` | Whisper model size | `base` | No |
-
-### Screenshot Assets
-
-- The annotated transcript uses Markdown image links pointing to the backend endpoint:
-  - `GET /api/screenshot/{folder}/{filename}`
-- Screenshots are stored under `temp/screenshots/{safe_title}_{short_id}/`.
 
 ### Whisper Model Size Options
 
@@ -288,8 +227,8 @@ A: Docker provides the easiest deployment method:
 **Quick Start:**
 ```bash
 # Clone and setup
-git clone https://github.com/wendy7756/AI-Video-Transcriber.git
-cd AI-Video-Transcriber
+git clone https://github.com/leezehuan/BitVideo-Insight.git
+cd BitVideo-Insight
 cp .env.example .env
 # Edit .env file to set your OPENAI_API_KEY
 
